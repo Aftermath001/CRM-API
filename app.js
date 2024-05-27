@@ -1,3 +1,4 @@
+require('dotenv').config()
 // Express to handle our routing
 const express = require("express")
 const app = express()
@@ -7,6 +8,7 @@ const cors = require("cors")
 const helmet = require("helmet")
 const morgan = require("morgan")
 const port = process.env.PORT || 3001
+const mongoose = require("mongoose");
 
 
 // APP security
@@ -14,6 +16,15 @@ app.use(helmet())
 
 // Handle CORS error
 app.use(cors())
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
 // Logger
 app.use(morgan("tiny"))
