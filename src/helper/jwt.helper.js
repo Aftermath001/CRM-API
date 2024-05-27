@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
+const { setJWT, getJWT} = require("./redis.helper")
+const {storeUserRefreshJWT} = require("../model/user/User.model")
 
-
-const crateAccessJWT =  (email, _id) =>{
+const crateAccessJWT = async (email, _id) =>{
     try {
-        const accessJWT = jwt.sign(
+        const accessJWT = await jwt.sign(
         { email },
         process.env.JWT_ACCESS_SECRET,
         {expiresIn: '30m',}
         )
-        // await setJWT(accessJWT, _id)
+        await setJWT(accessJWT, _id)
         return Promise.resolve(accessJWT);
         
     } catch (error) {
@@ -17,14 +18,14 @@ const crateAccessJWT =  (email, _id) =>{
    
 }
 
-const crateRefreshJWT =  (email, _id) =>{
+const crateRefreshJWT = async (email, _id) =>{
     try {
         const refreshJWT = jwt.sign(
             { email }, 
             process.env.JWT_REFRESH_SECRET,
             {expiresIn: '30d',}
         )
-        // await storeUserRefreshJWT(_id,refreshJWT)
+        await storeUserRefreshJWT(_id,refreshJWT)
         return Promise.resolve(refreshJWT);
         
     } catch (error) {
