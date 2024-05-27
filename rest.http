@@ -1,0 +1,21 @@
+### User sign-up endpoint
+POST http://localhost:3001/v1/user
+Content-Type: application/json
+
+{
+  "name": "Jephy Maina Kimani",
+  "company": "Company name",
+  "address": "Some address Sydney",
+  "phone": "0721573423",
+  "email": "maina2@gmail.com",
+  "password": "password"
+}
+
+### User sign-in endpoint
+POST http://localhost:3001/v1/user/login
+Content-Type: application/json
+
+{
+  "email": "maina2@gmail.com",
+  "password": "password"
+}

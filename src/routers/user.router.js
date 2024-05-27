@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const {hashPassword, comparePassword} = require("../helper/bcrypt.helper")
-const {insertUser} = require("../model/user/User.model")
+const {insertUser, getUserByEmail} = require("../model/user/User.model")
 
 router.all("/", (req, res, next)=>{
     
@@ -38,6 +38,28 @@ router.post("/", async (req, res) => {
         res.json({ status: "error", message:error.message });
         
     }
+})
+
+
+// Login in a user
+router.post("/login", async (req, res) => {
+    const {email, password} = req.body
+    if (!email || !password){
+        return res.json({status:"error", message:" Check Credentials, Invalid submission!"})
+    }
+
+    // get user email from DB
+    const user = await getUserByEmail(email)
+    const passFromDB = user && user._id ? user.password : null;
+    if(!passFromDB) 
+        return res.json({status:"error", message:" Invalid email or password!"})
+    
+    const result = await  comparePassword(password, passFromDB)
+    console.log(result)
+
+    return res.json({status:"error", message:" Invalid email or password!"})
+
+  
 })
 
 module.exports = router;
