@@ -3,11 +3,11 @@ POST http://localhost:3001/v1/user
 Content-Type: application/json
 
 {
-  "name": "Jephy Maina Kimani",
+  "name": "Jimmy Kigen",
   "company": "Company name",
   "address": "Some address Sydney",
   "phone": "0721573423",
-  "email": "maina2@gmail.com",
+  "email": "jimmy@gmail.com",
   "password": "password"
 }
 
@@ -16,6 +16,12 @@ POST http://localhost:3001/v1/user/login
 Content-Type: application/json
 
 {
-  "email": "maina2@gmail.com",
+  "email": "jimmy@gmail.com",
   "password": "password"
 }
+
+### Get user profile endpoint
+GET http://localhost:3001/v1/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjgxMTE4OSwiZXhwIjoxNzE2ODEyOTg5fQ.P31lbRku3yTZb5QgJ-iLNRQH-MSr3N9c6gCNKQqQ048
+
+### Token routes

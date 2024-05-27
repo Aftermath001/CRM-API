@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const { crateAccessJWT, crateRefreshJWT } = require ("../helper/jwt.helper")
+const {userAuthorization} = require("../middlewares/auth.middleware")
 const {hashPassword, comparePassword} = require("../helper/bcrypt.helper")
-const {insertUser, getUserByEmail} = require("../model/user/User.model")
+const {insertUser, getUserByEmail,getUserById} = require("../model/user/User.model")
 
 router.all("/", (req, res, next)=>{
     
@@ -10,6 +11,15 @@ router.all("/", (req, res, next)=>{
     next();
 });
 
+// Get user profile router
+router.get("/", userAuthorization, async (req, res)=>{
+    // data from DB
+    const _id = req.userId
+
+    // Extract userID
+    const userProf = await getUserById(_id)
+    res.json({user: userProf})
+})
 
 // Create a new user
 router.post("/", async (req, res) => {
