@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const { crateAccessJWT, crateRefreshJWT } = require ("../helper/jwt.helper")
 const {hashPassword, comparePassword} = require("../helper/bcrypt.helper")
 const {insertUser, getUserByEmail} = require("../model/user/User.model")
 
@@ -53,11 +54,20 @@ router.post("/login", async (req, res) => {
     const passFromDB = user && user._id ? user.password : null;
     if(!passFromDB) 
         return res.json({status:"error", message:" Invalid email or password!"})
-    
-    const result = await  comparePassword(password, passFromDB)
-    console.log(result)
 
-    return res.json({status:"error", message:" Invalid email or password!"})
+    const result = await  comparePassword(password, passFromDB)
+    if(!result){
+        return res.json({status:"error", message:" Invalid email or password!"})
+        
+    }
+    const accessJWT =  await crateAccessJWT(user.email, `${user._id}`)
+    const refreshJWT = await crateRefreshJWT(user.email, `${user._id}`)
+    res.json({
+        status:"success", 
+        message:"Login Successful",
+        accessJWT,
+        refreshJWT,
+    })
 
   
 })
