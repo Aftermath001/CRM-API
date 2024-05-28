@@ -3,11 +3,11 @@ POST http://localhost:3001/v1/user
 Content-Type: application/json
 
 {
-  "name": "Jimmy Kigen",
+  "name": "Jephy Maina Kimani",
   "company": "Company name",
   "address": "Some address Sydney",
   "phone": "0721573423",
-  "email": "jimmy@gmail.com",
+  "email": "maina22@gmail.com",
   "password": "password"
 }
 
@@ -16,16 +16,44 @@ POST http://localhost:3001/v1/user/login
 Content-Type: application/json
 
 {
-  "email": "jimmy@gmail.com",
+  "email": "maina22@gmail.com",
   "password": "password"
 }
 
 ### Get user profile endpoint
 GET http://localhost:3001/v1/user
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjg3ODM3OCwiZXhwIjoxNzE2ODgwMTc4fQ.1pc_DJTJnkXrOy62RJ4JFlnV9eH0tNN8Vw3j1Ty15yM
-### Token routes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1haW5hMjJAZ21haWwuY29tIiwiaWF0IjoxNzE2ODc5MzA0LCJleHAiOjE3MTY4ODExMDR9.3kz8GVwA5R_V2iR74B3LkdgNU6QnjfMBU8VWwl5-Fj8
 
+### Token routes
 
 ### Get refreshed token
 GET http://localhost:3001/v1/tokens
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjg3ODM3OCwiZXhwIjoxNzE2ODgwMTc4fQ.1pc_DJTJnkXrOy62RJ4JFlnV9eH0tNN8Vw3j1Ty15yM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1haW5hMjJAZ21haWwuY29tIiwiaWF0IjoxNzE2ODc5MzA0LCJleHAiOjE3MTY4ODExMDR9.3kz8GVwA5R_V2iR74B3LkdgNU6QnjfMBU8VWwl5-Fj8
+
+
+#### Password reset request endpoints
+POST http://localhost:3001/v1/user/reset-password
+Content-Type: application/json 
+
+{
+    "email": "maina22@gmail.com"
+}
+
+#### Update new password endpoint
+PATCH  http://localhost:3001/v1/user/reset-password
+Content-Type: application/json 
+
+{
+    "email": "maina22@gmail.com",
+    "pin": 786889,
+    "newPassword": "password"
+}
+
+#### user logout endpoint
+DELETE http://localhost:3001/v1/user/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1haW5hMjJAZ21haWwuY29tIiwiaWF0IjoxNzE2ODc5MzA0LCJleHAiOjE3MTY4ODExMDR9.3kz8GVwA5R_V2iR74B3LkdgNU6QnjfMBU8VWwl5-Fj8
+
+
+### Get ticket by Id
+GET http://localhost:3001/v1/ticket/_id
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1haW5hQGdtYWlsLmNvbSIsImlhdCI6MTcxNjI3Njc2NSwiZXhwIjoxNzE2Mjc4NTY1fQ.tzKnKBp3uR-8w02puHFNc7uNYQ-IosUFxylcY6E6I0Q

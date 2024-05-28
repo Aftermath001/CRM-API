@@ -10,7 +10,6 @@ const morgan = require("morgan")
 const port = process.env.PORT || 3001
 const mongoose = require("mongoose");
 
-
 // APP security
 app.use(helmet())
 
@@ -18,7 +17,7 @@ app.use(helmet())
 app.use(cors())
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -33,15 +32,21 @@ app.use(morgan("tiny"))
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json())
 
+
+
+
 // Load Routers
 const userRouter = require("./src/routers/user.router")
 const ticketRouter = require("./src/routers/ticket.router")
 const tokensRouter = require("./src/routers/tokens.router")
 
+
+
 // Use Routers
 app.use("/v1/user", userRouter);
 app.use("/v1/ticket", ticketRouter)
 app.use("/v1/tokens", tokensRouter)
+
 
 // Error Handler
 const handleError = require("./src/utils/errorHandler")
@@ -56,6 +61,14 @@ app.use((error,req,res, next)=> {
     handleError(error,res)
 })
 
+
+
+
+
+
 app.listen(port, ()=> {
     console.log(`API is ready on http://localhost:${port}`)
 });
+
+// console.log("Cleint API")
+
