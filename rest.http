@@ -22,6 +22,10 @@ Content-Type: application/json
 
 ### Get user profile endpoint
 GET http://localhost:3001/v1/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjgxMTE4OSwiZXhwIjoxNzE2ODEyOTg5fQ.P31lbRku3yTZb5QgJ-iLNRQH-MSr3N9c6gCNKQqQ048
-
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjg3ODM3OCwiZXhwIjoxNzE2ODgwMTc4fQ.1pc_DJTJnkXrOy62RJ4JFlnV9eH0tNN8Vw3j1Ty15yM
 ### Token routes
+
+
+### Get refreshed token
+GET http://localhost:3001/v1/tokens
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppbW15QGdtYWlsLmNvbSIsImlhdCI6MTcxNjg3ODM3OCwiZXhwIjoxNzE2ODgwMTc4fQ.1pc_DJTJnkXrOy62RJ4JFlnV9eH0tNN8Vw3j1Ty15yM

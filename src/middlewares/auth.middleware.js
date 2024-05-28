@@ -1,5 +1,5 @@
 const {verifyAccessJWT} = require("../helper/jwt.helper")
-const {getJWT} = require("../helper/redis.helper")
+const {getJWT, deleteJWT} = require("../helper/redis.helper")
 
 const userAuthorization = async (req, res, next) => {
     const {authorization} = req.headers
@@ -7,7 +7,6 @@ const userAuthorization = async (req, res, next) => {
 
     // Verify if JWT is valid or exists in Redis DB
     const decoded = await verifyAccessJWT(authorization)
-    // console.log(decoded)
     if(decoded.email){
         const userId = await getJWT(authorization)
 
@@ -19,7 +18,7 @@ const userAuthorization = async (req, res, next) => {
         req.userId = userId
         return next()
     }
-    // deleteJWT(authorization)
+    deleteJWT(authorization)
     return res.status(403).json({message: "Forbidden"})
     
     // res.json(authorization)
